@@ -1,1 +1,1 @@
-
+from keyword_extract.keyword_extract import KeywordExtractor
