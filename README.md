@@ -49,6 +49,10 @@ keyword_extractor.add_keyword_from_list(['江苏', '苏州'])  # keyword_count i
 # add_keyword_from_dict
 keyword_dict = {'苏州': 'GPE', '苏州大学': 'ORG'}
 keyword_extractor.add_keyword_from_dict(keyword_dict)  # now, keyword_count is 3
+
+# add_keyword_from_file
+path = 'path_to_your_keywords'
+keyword_extractor.add_keyword_from_file(path)
 ```
 
 ## 2.3 删除关键词
