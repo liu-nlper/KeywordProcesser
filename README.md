@@ -11,7 +11,7 @@ from keyword_extract import KeywordExtractor
 keyword_dict = {'苏州': 'GPE', '苏大': 'ORG', '北京': 'GPE', '苏州大学': 'ORG'}
 keyword_extractor = KeywordExtractor()
 keyword_extractor.add_keyword_from_dict(keyword_dict)
-print(keyword_extractor.keyword_count)
+print(keyword_extractor.keyword_count)  # 4
 
 text = '江苏省苏州市沧浪区干将东路333号苏州大学本部。'
 print(text)
