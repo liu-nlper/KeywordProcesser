@@ -20,7 +20,6 @@ keyword_extractor.add_keyword_from_dict(keyword_dict)
 print(keyword_extractor.keyword_count)  # 4
 
 text = '江苏省苏州市沧浪区干将东路333号苏州大学本部。'
-print(text)
 
 # extract_keywords
 keywords = keyword_extractor.extract_keywords_yield(text)
