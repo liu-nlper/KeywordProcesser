@@ -1,7 +1,11 @@
 # KeywordExtractor
 使用python实现了一个简单的trie树结构，可增加/查找/删除关键词，用于中文的关键词匹配。
 
-## 1. 抽取关键词
+# 1 Installation
+执行：`python/python3 setup.py install`
+
+# 2 Usage
+## 2.1 抽取关键词
 - extract_keywords
 - extract_keywords_yield
 
@@ -25,7 +29,7 @@ for item in keyword_extractor.extract_keywords_yield(text):
     print(item)
 ```
 
-## 2. 添加关键词
+## 2.2 添加关键词
 - add_keyword: 添加单个关键词；
 - add_keyword_from_list: 从列表中添加关键词；
 - add_keyword_from_dict: 从字典中添加关键词，{关键词: 关键词类型}；
@@ -45,7 +49,7 @@ keyword_dict = {'苏州': 'GPE', '苏州大学': 'ORG'}
 keyword_extractor.add_keyword_from_dict(keyword_dict)  # now, keyword_count is 3
 ```
 
-## 3. 删除关键词
+## 2.3 删除关键词
 - delete_keyword
 - delete_keyword_from_list
 
@@ -64,7 +68,7 @@ keyword_extractor.delete_keyword('苏州')  # return False
 keyword_extractor.delete_keyword_from_list(['苏州', '江苏'])
 ```
 
-## 4. 获取关键词的类型
+## 2.4 获取关键词的类型
 - get_keyword_type
 
 ```python
@@ -79,7 +83,7 @@ keyword_extractor.get_keyword_type('苏州')  # GPE
 keyword_extractor.get_keyword_type('苏州大学')  # None
 ```
 
-## 5. 是否包含某个关键词
+## 2.5 是否包含某个关键词
 - contain_keyword
 
 ```python
