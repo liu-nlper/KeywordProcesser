@@ -22,7 +22,7 @@ keywords = keyword_extractor.extract_keywords_yield(text)
 
 # extract_keywords_yield
 for item in keyword_extractor.extract_keywords_yield(text):
-	print(item)
+    print(item)
 ```
 
 ## 2. 添加关键词
