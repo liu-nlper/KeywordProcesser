@@ -3,7 +3,8 @@
 
 # 1 Installation
 ::
-$ python/python3 setup.py install
+
+    $ python/python3 setup.py install
 
 # 2 Usage
 ## 2.1 抽取关键词
