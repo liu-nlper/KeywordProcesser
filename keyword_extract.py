@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
+__author__ = 'jxliu.nlper@gmail.com'
 
 
 class KeywordExtractor(object):
@@ -66,14 +67,26 @@ class KeywordExtractor(object):
         for keyword in keyword_dict:
             self.add_keyword(keyword, keyword_dict[keyword])
 
-    def add_keyword_from_file(self, path):
+    def add_keyword_from_file(self, path, split='\t'):
         """
         Add keyword from file.
 
         Args:
             path (str): 关键词存放路径
         """
-        pass
+        import codecs
+        file_r = codecs.open(path, 'r', encoding='utf-8')
+        line = file_r.readline()
+        while line:
+            if not line.strip():
+                line = file_r.readline()
+                continue
+            items = line.strip().split(split)
+            if len(items) == 1:
+                self.add_keyword(items[0])
+            else:
+                self.add_keyword(items[0], items[1])
+            line = file_r.readline()
 
     def delete_keyword(self, keyword):
         """
