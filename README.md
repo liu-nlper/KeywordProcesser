@@ -2,7 +2,8 @@
 使用python实现了一个简单的trie树结构，可增加/查找/删除关键词，用于中文的关键词匹配。
 
 # 1 Installation
-执行：`python/python3 setup.py install`
+::
+$ python/python3 setup.py install
 
 # 2 Usage
 ## 2.1 抽取关键词
