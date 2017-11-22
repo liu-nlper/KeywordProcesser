@@ -22,7 +22,7 @@ print(keyword_extractor.keyword_count)  # 4
 text = '江苏省苏州市沧浪区干将东路333号苏州大学本部。'
 
 # extract_keywords
-keywords = keyword_extractor.extract_keywords_yield(text)
+keywords = keyword_extractor.extract_keywords(text)
 # [[3, 5, 'GPE'], [6, 9, 'GPE'], [17, 21, 'ORG']]
 
 # extract_keywords_yield
