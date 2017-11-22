@@ -1,5 +1,5 @@
 # KeywordExtractor
-使用python实现了一个简单的trie树结构，可增加/查找/删除结点，用于中文的关键词匹配。
+使用python实现了一个简单的trie树结构，可增加/查找/删除关键词，用于中文的关键词匹配。
 
 ## 1. 抽取关键词
 - extract_keywords
