@@ -263,7 +263,7 @@ def demo():
     keyword_extractor = KeywordExtractor()
     keyword_extractor.add_keyword_from_dict(keyword_dict)
     print(keyword_extractor.keyword_count)
-    text = '我住在江苏省苏州市苏州大学333号,苏州大的小明'
+    text = '江苏省苏州市沧浪区干将东路333号苏州大学本部。'
     print(text)
     for item in keyword_extractor.extract_keywords_yield(text):
         print(item)
