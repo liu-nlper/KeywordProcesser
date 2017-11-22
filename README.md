@@ -35,14 +35,14 @@ for item in keyword_extractor.extract_keywords_yield(text):
 keyword_extractor = KeywordExtractor()
 
 # add_keyword
-keyword_extractor.add_keyword('苏州')
+keyword_extractor.add_keyword('苏州')  # keyword_count is 1
 
 # add_keyword_from_list
-keyword_extractor.add_keyword_from_list(['江苏', '苏州'])
+keyword_extractor.add_keyword_from_list(['江苏', '苏州'])  # keyword_count is 2
 
 # add_keyword_from_dict
 keyword_dict = {'苏州': 'GPE', '苏州大学': 'ORG'}
-keyword_extractor.add_keyword_from_dict(keyword_dict)
+keyword_extractor.add_keyword_from_dict(keyword_dict)  # now, keyword_count is 3
 ```
 
 ## 3. 删除关键词
@@ -57,8 +57,11 @@ keyword_extractor.add_keyword('苏州', 'GPE')
 keyword_extractor.add_keyword('北京', 'GPE')
 
 # delete_keyword
-keyword_extractor.delete_keyword_from_list(['苏州', '江苏'])  # return True
-keyword_extractor.delete_keyword_from_list(['苏州', '江苏'])  # return False
+keyword_extractor.delete_keyword('苏州')  # return True, keyword_count is 1
+keyword_extractor.delete_keyword('苏州')  # return False
+
+# delete_keyword_from_list
+keyword_extractor.delete_keyword_from_list(['苏州', '江苏'])
 ```
 
 ## 4. 获取关键词的类型
