@@ -87,6 +87,7 @@ class KeywordExtractor(object):
             else:
                 self.add_keyword(items[0], items[1])
             line = file_r.readline()
+        file_r.close()
 
     def delete_keyword(self, keyword):
         """
