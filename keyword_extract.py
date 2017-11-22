@@ -58,7 +58,7 @@ class KeywordExtractor(object):
         Add keywords from list.
 
         Args:
-            keyword_dict (dict): list of keywords
+            keyword_dict (dict): keywords dict, {keyword: keyword_type}
 
         Examples:
             >>> keyword_extractor = KeywordExtractor()
@@ -73,15 +73,17 @@ class KeywordExtractor(object):
 
         Args:
             path (str): 关键词存放路径
+            split (str): 分隔符
         """
         import codecs
         file_r = codecs.open(path, 'r', encoding='utf-8')
         line = file_r.readline()
         while line:
-            if not line.strip():
+            line = line.strip()
+            if not line:
                 line = file_r.readline()
                 continue
-            items = line.strip().split(split)
+            items = line.split(split)
             if len(items) == 1:
                 self.add_keyword(items[0])
             else:
