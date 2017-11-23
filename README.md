@@ -115,5 +115,5 @@ keyword_extractor.add_keyword('苏州大学', 'ORG')
 
 # get_keywords
 keywords = keyword_extractor.get_keywords()
-# ['苏州', '苏州大学']
+# {'苏州': 'GPE', '苏州大学': 'ORG'}
 ```
