@@ -102,3 +102,18 @@ keyword_extractor.contain_keyword('苏州')  # return True
 keyword_extractor.delete_keyword('苏州')
 keyword_extractor.contain_keyword('苏州')  # return False
 ```
+
+## 2.6 获取所有关键词
+- get_keywords
+
+```python
+keyword_extractor = KeywordExtractor()
+
+# add_keyword
+keyword_extractor.add_keyword('苏州', 'GPE')
+keyword_extractor.add_keyword('苏州大学', 'ORG')
+
+# get_keywords
+keywords = keyword_extractor.get_keywords()
+# ['苏州', '苏州大学']
+```
