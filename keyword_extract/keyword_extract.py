@@ -263,16 +263,15 @@ class KeywordExtractor(object):
         Returns:
             keywords: list
         """
-        keywords = []
+        keywords = dict()
         if current_dict is None:
             current_dict = self.keyword_trie_dict
         for char in current_dict:
             if char == self._keyword_flag:
-                keywords.append(keyword_part)
+                keywords[keyword_part] = current_dict[self._keyword_flag]
             else:
                 keywords_ = self.get_keywords(keyword_part+char, current_dict[char])
-                for keyword in keywords_:
-                    keywords.append(keyword)
+                keywords.update(keywords_)
         return keywords
 
 
