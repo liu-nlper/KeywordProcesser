@@ -256,6 +256,25 @@ class KeywordExtractor(object):
             return False
         return True
 
+    def get_keywords(self, keyword_part='', current_dict=None):
+        """
+        获取所有的keywords
+
+        Returns:
+            keywords: list
+        """
+        keywords = []
+        if current_dict is None:
+            current_dict = self.keyword_trie_dict
+        for char in current_dict:
+            if char == self._keyword_flag:
+                keywords.append(keyword_part)
+            else:
+                keywords_ = self.get_keywords(keyword_part+char, current_dict[char])
+                for keyword in keywords_:
+                    keywords.append(keyword)
+        return keywords
+
 
 def demo():
     keyword_dict = {'苏州': 'GPE', '苏大': 'ORG', '北京': 'GPE', '苏州大学': 'ORG',
@@ -267,6 +286,10 @@ def demo():
     print(text)
     for item in keyword_extractor.extract_keywords_yield(text):
         print(item)
+
+    # get_keywords
+    print('all keywords:')
+    print(keyword_extractor.get_keywords())
 
 
 if __name__ == '__main__':
