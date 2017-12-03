@@ -51,7 +51,7 @@ keyword_extractor.add_keyword_from_dict(keyword_dict)  # now, keyword_count is 3
 
 # add_keyword_from_file
 path = 'path_to_your_keywords'
-keyword_extractor.add_keyword_from_file(path)
+keyword_extractor.add_keyword_from_file(path, split='\t')
 ```
 
 ## 2.3 删除关键词
