@@ -74,7 +74,7 @@ class KeywordExtractor(object):
         Args:
             path (str): 关键词存放路径
             split (str): 分隔符，用于分隔关键词和关键词类型
-            
+
         Examples:
             >>> keyword_extractor = KeywordExtractor()
             >>> path = 'path to your keywords'
