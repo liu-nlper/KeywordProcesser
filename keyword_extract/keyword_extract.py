@@ -7,15 +7,20 @@ class KeywordExtractor(object):
     """
     中文keyword extractor
 
+    Args:
+        ignore: bool, default is false
+
     Attributes:
         keyword_trie_dict (dict): trie tree
         keyword_count (int): trie tree树中关键词数目
     """
 
-    def __init__(self):
+    def __init__(self, ignore=False):
         self.keyword_trie_dict = dict()
         self.keyword_count = 0
         self._keyword_flag = '_type_'
+
+        self._ignore = ignore
 
     def add_keyword(self, keyword, keyword_type=None):
         """
@@ -154,6 +159,8 @@ class KeywordExtractor(object):
         index, entity_type = -1, ''
 
         for i in range(start, end):
+            if text[i] == ' ' and self._ignore:
+                continue
             if text[i] not in current_dict:
                 if index == -1:
                     return start+1, 0, ''
@@ -295,5 +302,15 @@ def demo():
     print(keyword_extractor.get_keywords())
 
 
+def demo2():
+    keyword_dict = {'a-b': 'a-b'}
+    keyword_extractor = KeywordExtractor(True)
+    keyword_extractor.add_keyword_from_dict(keyword_dict)
+    print(keyword_extractor.keyword_count)
+    text = 'xxxa -  bxxx'
+    for item in keyword_extractor.extract_keywords_yield(text):
+        print(item)
+
+
 if __name__ == '__main__':
-    demo()
+    demo2()
