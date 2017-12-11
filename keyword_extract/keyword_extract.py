@@ -8,19 +8,19 @@ class KeywordExtractor(object):
     中文keyword extractor
 
     Args:
-        ignore: bool, default is false
+        ignore_space: bool, default is false
 
     Attributes:
         keyword_trie_dict (dict): trie tree
         keyword_count (int): trie tree树中关键词数目
     """
 
-    def __init__(self, ignore=False):
+    def __init__(self, ignore_space=False):
         self.keyword_trie_dict = dict()
         self.keyword_count = 0
         self._keyword_flag = '_type_'
 
-        self._ignore = ignore
+        self._ignore_space = ignore_space
 
     def add_keyword(self, keyword, keyword_type=None):
         """
@@ -285,6 +285,13 @@ class KeywordExtractor(object):
                 keywords_ = self.get_keywords(keyword_part+char, current_dict[char])
                 keywords.update(keywords_)
         return keywords
+
+    def set_ignore_space(self, ignore_space):
+        """
+        Args:
+            ignore_space: bool
+        """
+        self._ignore_space = ignore_space
 
 
 def demo():
