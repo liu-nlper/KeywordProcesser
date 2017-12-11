@@ -159,7 +159,7 @@ class KeywordExtractor(object):
         index, entity_type = -1, ''
 
         for i in range(start, end):
-            if text[i] == ' ' and self._ignore:
+            if text[i] == ' ' and self._ignore_space:
                 continue
             if text[i] not in current_dict:
                 if index == -1:
