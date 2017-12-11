@@ -28,6 +28,14 @@ keywords = keyword_extractor.extract_keywords(text)
 # extract_keywords_yield
 for item in keyword_extractor.extract_keywords_yield(text):
     print(item)
+
+# 匹配时忽略空格
+text = '苏州 大学'
+keywords = keyword_extractor.extract_keywords(text)
+# [[0, 2, 'GPE']] -> '苏州'
+keyword_extractor.set_ignore_space(True)
+keywords = keyword_extractor.extract_keywords(text)
+# [[0, 5, 'ORG']] -> '苏州 大学'
 ```
 
 ## 2.2 添加关键词
