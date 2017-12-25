@@ -125,3 +125,8 @@ keyword_extractor.add_keyword('苏州大学', 'ORG')
 keywords = keyword_extractor.get_keywords()
 # {'苏州': 'GPE', '苏州大学': 'ORG'}
 ```
+
+## TODO
+1. 移除停用词；
+2. 同义词替换；
+3. other...
