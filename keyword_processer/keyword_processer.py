@@ -9,18 +9,29 @@ class KeywordProcesser(object):
 
     Args:
         ignore_space: bool, default is false
+        keywords: str, list, dict, if str, then call
+            self.add_keyword_from_file
 
     Attributes:
         keyword_trie_dict (dict): trie tree
         keyword_count (int): trie tree树中关键词数目
     """
 
-    def __init__(self, ignore_space=False):
+    def __init__(self, keywords=None, ignore_space=False):
         self.keyword_trie_dict = dict()
         self.keyword_count = 0
         self._keyword_flag = '_type_'
 
         self._ignore_space = ignore_space
+
+        if isinstance(keywords, str):
+            self.add_keyword_from_file(keywords)
+        elif isinstance (keywords, list):
+            self.add_keyword_from_list(keywords)
+        elif isinstance(keywords, dict):
+            self.add_keyword_from_dict(keywords)
+        else:
+            pass
 
     def add_keyword(self, keyword, keyword_type=None):
         """
@@ -201,6 +212,36 @@ class KeywordProcesser(object):
                 keywords.append([end-entity_len, end, entity_type])
         return keywords
 
+    def extract_keywords_from_list(self, words):
+        """
+        从词序列中抽取关键词
+
+        Args:
+            words: list of str, 词序列
+
+        Returns:
+            keywords (list): list of keywords and their positions
+        """
+        keywords = []
+        for i, word in enumerate(words):
+            if self.contain_keyword(word):
+                keywords.append([word, i])
+        return keywords
+
+    def extract_keywords_from_list_yield(self, words):
+        """
+        从词序列中抽取关键词
+
+        Args:
+            words: list of str, 词序列
+
+        yield:
+            [word, i]: keyword and its positions
+        """
+        for i, word in enumerate(words):
+            if self.contain_keyword(word):
+                yield [word, i]
+
     def extract_keywords_yield(self, text):
         """
         抽取text中存在的关键词
@@ -286,6 +327,48 @@ class KeywordProcesser(object):
                 keywords.update(keywords_)
         return keywords
 
+    def remove_keywords_in_words(self, words):
+        """
+        从单词序列中删除关键词
+
+        Args:
+            words: list of word, 词序列
+
+        Returns:
+            words: list of word, 删除关键词之后的词序列
+        """
+        words_ = []
+        for word in words:
+            if self.contain_keyword(word):
+                continue
+            words_.append(word)
+        return words_
+
+    def remove_keywords_in_text(self, text, token_wise=False):
+        """
+        从句子中删除关键词
+
+        Args:
+            text (str): 从句子中删除关键词
+            token_wise (bool): 是否以token为单位进行匹配，若是，
+                则将句子以空格切成若干token，然后以token为单位进行匹配；
+                否则，以字符为单位进行匹配。
+
+        Returns:
+            text (str): 删除关键词之后的句子
+        """
+        if token_wise:  # 以token为单位
+            return ' '.join(remove_keyword_in_words(sentence.split(' ')))
+        # 以字符为单位
+        text_ = ''
+        start, end, text_len = 0, 0, len(text)
+        while end < text_len:
+            end, entity_len, entity_type = self._match_text(text, end, text_len)
+            if not entity_type:
+                text_ += text[start:end]
+            start = end
+        return text_
+
     def set_ignore_space(self, ignore_space):
         """
         Args:
@@ -319,5 +402,35 @@ def demo2():
         print(item)
 
 
+def demo3():
+    keyword_dict = {'江苏省': 'GPE', '苏大': 'ORG', '北京': 'GPE', '苏州大学': 'ORG',
+                    '苏有朋': 'PER', '苏有月': 'PER'}
+    keyword_processer = KeywordProcesser()
+    keyword_processer.add_keyword_from_dict(keyword_dict)
+    print(keyword_processer.keyword_count)
+    words = ['江苏省', '苏州市', '沧浪区', '干将东路', '333号', '苏州大学', '本部', '。']
+    keywords = keyword_processer.extract_keywords_from_list(words)
+    print(keywords)
+
+
+def demo_delete_stopwords():
+    """
+    测试删除通用词
+    """
+    stopwords = ['、', '，', '。', '的', '对', '和', '这个', '一切']
+    sentence = '这个时间落伍的计时机无意中对人生包涵的讽刺和感伤，深于一切语言、一切啼笑。'
+    print(sentence)
+    keyword_processer = KeywordProcesser(stopwords)
+    sentence = keyword_processer.remove_keywords_in_text(sentence)
+    print(sentence)
+
+    keyword_processer = KeywordProcesser(stopwords)
+    words = ['这个', '时间', '落伍', '的', '计时机', '无意', '中', '对', '人生', '包涵',
+             '的', '讽刺', '和', '感伤', '，', '深于', '一切', '语言', '、', '一切', '啼笑', '。']
+    print(words)
+    words = keyword_processer.remove_keywords_in_words(words)
+    print(''.join(words))
+
+
 if __name__ == '__main__':
-    demo()
+    demo3()
