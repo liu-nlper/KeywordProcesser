@@ -167,5 +167,5 @@ keywords = keyword_processer.get_keywords()
 
 ## TODO
 
-- [] 关键词替换
-- [] other...
+- [ ] 关键词替换
+- [ ] other...
