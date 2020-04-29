@@ -1,4 +1,7 @@
 # KeywordProcesser
+
+**注**：请访问改进版，AC自动机[https://github.com/liu-nlper/AhoCorasickAutomation](https://github.com/liu-nlper/AhoCorasickAutomation)
+
 使用python实现了一个简单的trie树结构，可增加/查找/删除关键词，用于中文的关键词匹配、停用词删除等。
 
 # 1 Installation
